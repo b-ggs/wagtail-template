@@ -41,7 +41,7 @@ RUN pip install --upgrade pip && poetry install --no-root
 EXPOSE 8000
 
 # Copy the source code of the project into the container.
-COPY --chown=wagtail_template:wagtail_template. .
+COPY --chown=wagtail_template:wagtail_template . .
 
 # Collect static files.
 RUN python manage.py collectstatic --noinput --clear
