@@ -28,6 +28,11 @@ INSTALLED_APPS = [
     'home',
     'search',
 
+    # Simplified static file serving
+    # https://devcenter.heroku.com/articles/django-assets
+    # https://warehouse.python.org/project/whitenoise/
+    "whitenoise",
+
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
     'wagtail.embeds',
@@ -59,6 +64,11 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+
+    # Simplified static file serving
+    # https://devcenter.heroku.com/articles/django-assets
+    # https://warehouse.python.org/project/whitenoise/
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
 ]
@@ -171,3 +181,8 @@ BASE_URL = 'http://example.com'
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(",")
 
 SECRET_KEY = os.getenv("SECRET_KEY", "")
+
+# Simplified static file serving
+# https://devcenter.heroku.com/articles/django-assets
+# https://warehouse.python.org/project/whitenoise/
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
