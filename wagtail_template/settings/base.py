@@ -17,6 +17,9 @@ import dj_database_url
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
+# Django env
+DJANGO_ENV = os.environ.get("DJANGO_ENV", "production")
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
