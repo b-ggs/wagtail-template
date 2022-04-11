@@ -169,3 +169,5 @@ WAGTAILSEARCH_BACKENDS = {
 BASE_URL = 'http://example.com'
 
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(",")
+
+SECRET_KEY = os.environ["SECRET_KEY"]
