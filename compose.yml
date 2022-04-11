@@ -5,6 +5,7 @@ services:
       - "8000:8000"
     environment:
       DATABASE_URL: postgres://postgres:postgres@postgres:5432/postgres
+      DJANGO_SETTINGS_MODULE: wagtail_template.settings.dev
     volumes:
       - .:/app
     init: true
