@@ -197,15 +197,23 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 if sentry_dsn := os.getenv("SENTRY_DSN"):
     import sentry_sdk
     from sentry_sdk.integrations.django import DjangoIntegration
+    from sentry_sdk.utils import get_default_release
 
     SENTRY_ENVIRONMENT = DJANGO_ENV
-    SENTRY_RELEASE = os.getenv("HEROKU_SLUG_COMMIT", "")
+
+    # Attempt to get release version from Sentry's utils and a couple other environment variables
+    def get_release_version():
+        release = get_default_release()
+        # Use GIT_REV for Dokku
+        release = release or os.getenv("GIT_REV")
+        # Use DJANGO_ENV as a final fallback
+        return release or DJANGO_ENV
 
     SENTRY_ARGS = {
         "dsn": sentry_dsn,
         "integrations": [DjangoIntegration()],
         "environment": SENTRY_ENVIRONMENT,
-        "release": SENTRY_RELEASE,
+        "release": get_release_version(),
         "traces_sample_rate": 0.01,
     }
 
