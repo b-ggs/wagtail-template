@@ -192,42 +192,30 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 
 # Error reporting
-# https://docs.airbrake.io/docs/platforms/django/
-airbrake_project_id = os.getenv("AIRBRAKE_PROJECT_ID", "")
-airbrake_project_key = os.getenv("AIRBRAKE_PROJECT_KEY", "")
-airbrake_environment = DJANGO_ENV
-airbrake_host = os.getenv("AIRBRAKE_HOST", "https://api.airbrake.io")
+# https://docs.sentry.io/platforms/python/guides/django/
+# https://glitchtip.com/sdkdocs/python-django
+if sentry_dsn := os.getenv("SENTRY_DSN"):
+    import sentry_sdk
+    from sentry_sdk.integrations.django import DjangoIntegration
 
-if airbrake_project_id and airbrake_project_key and airbrake_environment and airbrake_host:
-    import pybrake
+    SENTRY_ENVIRONMENT = DJANGO_ENV
+    SENTRY_RELEASE = os.getenv("HEROKU_SLUG_COMMIT", "")
 
-    INSTALLED_APPS += ["pybrake"]
-    MIDDLEWARE += ["pybrake.django.AirbrakeMiddleware"]
-
-    AIRBRAKE = {
-        "project_id": airbrake_project_id,
-        "project_key": airbrake_project_key,
-        "environment": airbrake_environment,
-        "host": airbrake_host,
+    SENTRY_ARGS = {
+        "dsn": sentry_dsn,
+        "integrations": [DjangoIntegration()],
+        "environment": SENTRY_ENVIRONMENT,
+        "release": SENTRY_RELEASE,
+        "traces_sample_rate": 0.01,
     }
-    pybrake_notifier = pybrake.Notifier(**AIRBRAKE)
 
+    # Auto session tracking is not supported by GlitchTip
+    if "sentry.io" in sentry_dsn:
+        SENTRY_ARGS["auto_session_tracking"] = True
+    else:
+        SENTRY_ARGS["auto_session_tracking"] = False
 
-    LOGGING = {
-        "version": 1,
-        "disable_existing_loggers": False,
-        "handlers": {
-            "airbrake": {
-                "level": "ERROR",
-                "()": "pybrake.LoggingHandler",
-                "notifier": pybrake_notifier,
-            },
-        },
-        "loggers": {
-            "app": {
-                "handlers": ["airbrake"],
-                "level": "ERROR",
-                "propagate": True,
-            },
-        },
-    }
+    sentry_sdk.init(**SENTRY_ARGS)
+
+    # Enables URL to test Sentry integration
+    ENABLE_SENTRY_TEST_URL = os.environ.get("ENABLE_SENTRY_TEST_URL", "false").lower() == "true"

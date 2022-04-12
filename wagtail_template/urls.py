@@ -27,6 +27,14 @@ if settings.DEBUG:
     urlpatterns += staticfiles_urlpatterns()
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
+if hasattr(settings, "ENABLE_SENTRY_TEST_URL") and settings.ENABLE_SENTRY_TEST_URL:
+    def trigger_error(request):
+        division_by_zero = 1 / 0
+
+    urlpatterns += [
+        path("trigger-error/", trigger_error),
+    ]
+
 urlpatterns = urlpatterns + [
     # For anything not caught by a more specific rule above, hand over to
     # Wagtail's page serving mechanism. This should be the last pattern in
