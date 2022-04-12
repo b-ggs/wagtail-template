@@ -26,7 +26,7 @@ if settings.DEBUG:
 if hasattr(settings, "ENABLE_SENTRY_TEST_URL") and settings.ENABLE_SENTRY_TEST_URL:
 
     def trigger_error(request):
-        division_by_zero = 1 / 0
+        return 1 / 0
 
     urlpatterns += [
         path("trigger-error/", trigger_error),
