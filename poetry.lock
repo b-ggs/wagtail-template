@@ -1,4 +1,12 @@
 [[package]]
+name = "accumulation-tree"
+version = "0.6.2"
+description = "Red/black tree with support for fast accumulation of values in a key range"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "anyascii"
 version = "0.3.1"
 description = "Unicode to ASCII transliteration"
@@ -240,9 +248,28 @@ optional = false
 python-versions = ">=3.6"
 
 [[package]]
+name = "pybrake"
+version = "1.0.5"
+description = "Python exception notifier for Airbrake"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+tdigest = "*"
+
+[[package]]
 name = "pytz"
 version = "2022.1"
 description = "World timezone definitions, modern and historical"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
+name = "pyudorandom"
+version = "1.0.0"
+description = "Generate pseudorandom numbers by using algebra"
 category = "main"
 optional = false
 python-versions = "*"
@@ -311,6 +338,21 @@ pandas = ["pandas"]
 xls = ["xlrd", "xlwt"]
 xlsx = ["openpyxl (>=2.6.0)"]
 yaml = ["pyyaml"]
+
+[[package]]
+name = "tdigest"
+version = "0.5.2.2"
+description = "T-Digest data structure"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+accumulation-tree = "*"
+pyudorandom = "*"
+
+[package.extras]
+tests = ["pytest", "pytest-timeout", "pytest-cov", "numpy"]
 
 [[package]]
 name = "telepath"
@@ -437,9 +479,12 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "3.9.12"
-content-hash = "df407a4313b3dca7204872371713aa73becf23054ca29640bf7d34e7797b2fae"
+content-hash = "409ad401a38b12def0945e132981c6423b06e9f90f20b5ef17d3f8339183b4ab"
 
 [metadata.files]
+accumulation-tree = [
+    {file = "accumulation_tree-0.6.2.tar.gz", hash = "sha256:0de0f083ba56a82126d0af5940ba968264b201ab109b43581c6e709968417141"},
+]
 anyascii = [
     {file = "anyascii-0.3.1-py3-none-any.whl", hash = "sha256:8707d3185017435933360462a65e2c70a4818490745804f38a5ca55e59eb56a0"},
     {file = "anyascii-0.3.1.tar.gz", hash = "sha256:dedf57728206e286c91eed7c759505a5e45c8cd01367dd40c2f7248bb15c11f6"},
@@ -570,9 +615,15 @@ psycopg2 = [
     {file = "psycopg2-2.9.3-cp39-cp39-win_amd64.whl", hash = "sha256:06f32425949bd5fe8f625c49f17ebb9784e1e4fe928b7cce72edc36fb68e4c0c"},
     {file = "psycopg2-2.9.3.tar.gz", hash = "sha256:8e841d1bf3434da985cc5ef13e6f75c8981ced601fd70cc6bf33351b91562981"},
 ]
+pybrake = [
+    {file = "pybrake-1.0.5.tar.gz", hash = "sha256:0bff5bfea2dbd0dc93f52d9a30e18a94c11ef284efb1bedbbd011fe2820a0fd3"},
+]
 pytz = [
     {file = "pytz-2022.1-py2.py3-none-any.whl", hash = "sha256:e68985985296d9a66a881eb3193b0906246245294a881e7c8afe623866ac6a5c"},
     {file = "pytz-2022.1.tar.gz", hash = "sha256:1e760e2fe6a8163bc0b3d9a19c4f84342afa0a2affebfaa84b01b978a02ecaa7"},
+]
+pyudorandom = [
+    {file = "pyudorandom-1.0.0.tar.gz", hash = "sha256:f30a093a0170c15f9c7f87eb29f71f0f5fde995528b7c6dc4606d389e8c37755"},
 ]
 requests = [
     {file = "requests-2.27.1-py2.py3-none-any.whl", hash = "sha256:f22fa1e554c9ddfd16e6e41ac79759e17be9e492b3587efa038054674760e72d"},
@@ -593,6 +644,11 @@ sqlparse = [
 tablib = [
     {file = "tablib-3.2.1-py3-none-any.whl", hash = "sha256:870d7e688f738531a14937a055e8bba404fbc388e77d4d500b2c904075d1019c"},
     {file = "tablib-3.2.1.tar.gz", hash = "sha256:a57f2770b8c225febec1cb1e65012a69cf30dd28be810e0ff98d024768c7d0f1"},
+]
+tdigest = [
+    {file = "tdigest-0.5.2.2-py2.py3-none-any.whl", hash = "sha256:e32ff6ab62e4defdb93b816c831080d94dfa1efb68a9fa1e7976c237fa9375cb"},
+    {file = "tdigest-0.5.2.2-py3-none-any.whl", hash = "sha256:dd25f8d6e6be002192bba9e4b8c16491d36c10b389f50637818603d1f67c6fb2"},
+    {file = "tdigest-0.5.2.2.tar.gz", hash = "sha256:8deffc8bac024761786f43d9444e3b6c91008cd690323e051f068820a7364d0e"},
 ]
 telepath = [
     {file = "telepath-0.2-py35-none-any.whl", hash = "sha256:801615094d3d964e178183099bf04020f4ff9c84ec43945d40b096df0a5767ee"},

@@ -7,11 +7,14 @@ services:
       DATABASE_URL: postgres://postgres:postgres@postgres:5432/postgres
       DJANGO_SETTINGS_MODULE: wagtail_template.settings.dev
       DJANGO_ENV: development
+    env_file: .env
     volumes:
       - .:/app
     init: true
     stdin_open: true
     tty: true
+    depends_on:
+      - postgres
 
   postgres:
     image: postgres:14

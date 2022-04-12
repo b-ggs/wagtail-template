@@ -189,3 +189,45 @@ SECRET_KEY = os.getenv("SECRET_KEY", "")
 # https://devcenter.heroku.com/articles/django-assets
 # https://warehouse.python.org/project/whitenoise/
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+
+# Error reporting
+# https://docs.airbrake.io/docs/platforms/django/
+airbrake_project_id = os.getenv("AIRBRAKE_PROJECT_ID", "")
+airbrake_project_key = os.getenv("AIRBRAKE_PROJECT_KEY", "")
+airbrake_environment = DJANGO_ENV
+airbrake_host = os.getenv("AIRBRAKE_HOST", "https://api.airbrake.io")
+
+if airbrake_project_id and airbrake_project_key and airbrake_environment and airbrake_host:
+    import pybrake
+
+    INSTALLED_APPS += ["pybrake"]
+    MIDDLEWARE += ["pybrake.django.AirbrakeMiddleware"]
+
+    AIRBRAKE = {
+        "project_id": airbrake_project_id,
+        "project_key": airbrake_project_key,
+        "environment": airbrake_environment,
+        "host": airbrake_host,
+    }
+    pybrake_notifier = pybrake.Notifier(**AIRBRAKE)
+
+
+    LOGGING = {
+        "version": 1,
+        "disable_existing_loggers": False,
+        "handlers": {
+            "airbrake": {
+                "level": "ERROR",
+                "()": "pybrake.LoggingHandler",
+                "notifier": pybrake_notifier,
+            },
+        },
+        "loggers": {
+            "app": {
+                "handlers": ["airbrake"],
+                "level": "ERROR",
+                "propagate": True,
+            },
+        },
+    }

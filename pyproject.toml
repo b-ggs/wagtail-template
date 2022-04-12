@@ -13,6 +13,7 @@ gunicorn = "^20.1.0"
 dj-database-url = "^0.5.0"
 psycopg2 = "^2.9.3"
 whitenoise = "^6.0.0"
+pybrake = "^1.0.5"
 
 [tool.poetry.dev-dependencies]
 
