@@ -24,3 +24,8 @@ repos:
     rev: 1.7.4
     hooks:
       - id: bandit
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.2.0
+    hooks:
+      - id: detect-secrets
+        args: ["--baseline", ".secrets.baseline"]

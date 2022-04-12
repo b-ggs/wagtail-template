@@ -120,6 +120,22 @@ optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 
 [[package]]
+name = "detect-secrets"
+version = "1.2.0"
+description = "Tool for detecting secrets in the codebase"
+category = "dev"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+pyyaml = "*"
+requests = "*"
+
+[package.extras]
+gibberish = ["gibberish-detector"]
+word_list = ["pyahocorasick"]
+
+[[package]]
 name = "distlib"
 version = "0.3.4"
 description = "Distribution utilities"
@@ -768,7 +784,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "3.9.12"
-content-hash = "ed78683a36a9c69500bf041ffe5bc6054e1ac38c2d5e4d120a2f9c893bc39b6f"
+content-hash = "9146cd3ee8782b18f2a2b46a429b159dfc5afabe49c8db81625f6b695a2b3b62"
 
 [metadata.files]
 anyascii = [
@@ -832,6 +848,10 @@ click = [
 colorama = [
     {file = "colorama-0.4.4-py2.py3-none-any.whl", hash = "sha256:9f47eda37229f68eee03b24b9748937c7dc3868f906e8ba69fbcbdd3bc5dc3e2"},
     {file = "colorama-0.4.4.tar.gz", hash = "sha256:5941b2b48a20143d2267e95b1c2a7603ce057ee39fd88e7329b0c292aa16869b"},
+]
+detect-secrets = [
+    {file = "detect_secrets-1.2.0-py3-none-any.whl", hash = "sha256:51a8fc5d89340ba6d0c688049fc3381a2f24c6fbaf2f542e15f5b873b95bafe3"},
+    {file = "detect_secrets-1.2.0.tar.gz", hash = "sha256:c160e897b3d0e81bf9cf0f6cc2e5e6434fa609a159f9a2849fcae0a08b4e2a30"},
 ]
 distlib = [
     {file = "distlib-0.3.4-py2.py3-none-any.whl", hash = "sha256:6564fe0a8f51e734df6333d08b8b94d4ea8ee6b99b5ed50613f731fd4089f34b"},
