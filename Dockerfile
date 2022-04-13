@@ -1,4 +1,4 @@
-FROM python:3.9.11-bullseye
+FROM python:3.9.12-bullseye
 
 # Set up user
 RUN useradd --create-home wagtail_template
@@ -46,4 +46,4 @@ COPY --chown=wagtail_template:wagtail_template . .
 # Collect static files.
 RUN python manage.py collectstatic --noinput --clear
 
-CMD ["./manage.py", "runserver", "0:8000"]
+CMD ["gunicorn", "wagtail_template.wsgi:application"]
