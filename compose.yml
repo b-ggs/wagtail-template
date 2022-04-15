@@ -8,6 +8,15 @@ services:
       DATABASE_URL: postgres://postgres:postgres@postgres:5432/postgres
       DJANGO_SETTINGS_MODULE: wagtail_template.settings.dev
       DJANGO_ENV: development
+      AWS_STORAGE_BUCKET_NAME: wagtail-template
+      AWS_ACCESS_KEY_ID: minioadmin
+      AWS_SECRET_ACCESS_KEY: minioadmin  # pragma: allowlist secret
+      AWS_S3_REGION_NAME: us-east-1
+      AWS_S3_CUSTOM_DOMAIN: localhost:9000/wagtail-template
+      AWS_LOCATION: wagtail-template
+      AWS_S3_ENDPOINT_URL: http://minio:9000
+      AWS_S3_USE_SSL: "false"
+      AWS_S3_SECURE_URLS : "false"
     env_file: .env
     volumes:
       - .:/app
@@ -16,6 +25,7 @@ services:
     tty: true
     depends_on:
       - postgres
+      - minio
 
   postgres:
     image: postgres:14
@@ -28,5 +38,23 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data
 
+  minio:
+    image: minio/minio
+    command: server /data --console-address ":9001"
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin  # pragma: allowlist secret
+    volumes:
+      - minio-data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
 volumes:
   postgres-data:
+  minio-data:
