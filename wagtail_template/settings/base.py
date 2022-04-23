@@ -31,6 +31,7 @@ DJANGO_ENV = os.environ.get("DJANGO_ENV", "production")
 INSTALLED_APPS = [
     "wagtail_template.home",
     "wagtail_template.search",
+    "wagtail_template.utils",
     # Simplified static file serving
     # https://devcenter.heroku.com/articles/django-assets
     # https://warehouse.python.org/project/whitenoise/
