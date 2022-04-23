@@ -37,3 +37,9 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+
+# Docker
+compose.yml
+Dockerfile
+**.env
+**.env.example
