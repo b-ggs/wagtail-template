@@ -58,9 +58,9 @@ services:
       - minio-data:/data
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
-      interval: 30s
-      timeout: 20s
-      retries: 3
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
 volumes:
   postgres-data:
