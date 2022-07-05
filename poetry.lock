@@ -224,17 +224,32 @@ Django = ">=2.2"
 
 [[package]]
 name = "django-modelcluster"
-version = "5.3"
+version = "6.0"
 description = "Django extension to allow working with 'clusters' of models as a single unit, independently of the database"
 category = "main"
 optional = false
-python-versions = ">=3.5"
+python-versions = ">=3.7"
 
 [package.dependencies]
+django = ">=2.2"
 pytz = ">=2015.2"
 
 [package.extras]
 taggit = ["django-taggit (>=0.20)"]
+
+[[package]]
+name = "django-permissionedforms"
+version = "0.1"
+description = "Django extension for creating forms that vary according to user permissions"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+Django = "*"
+
+[package.extras]
+testing = ["django-modelcluster"]
 
 [[package]]
 name = "django-storages"
@@ -788,7 +803,7 @@ testing = ["coverage (>=4)", "coverage-enable-subprocess (>=1)", "flaky (>=3)", 
 
 [[package]]
 name = "wagtail"
-version = "2.16.2"
+version = "3.0.1"
 description = "A Django content management system."
 category = "main"
 optional = false
@@ -799,7 +814,8 @@ anyascii = ">=0.1.5"
 beautifulsoup4 = ">=4.8,<4.10"
 Django = ">=3.2,<4.1"
 django-filter = ">=2.2,<22"
-django-modelcluster = ">=5.2,<6.0"
+django-modelcluster = ">=6.0,<7.0"
+django-permissionedforms = ">=0.1,<1.0"
 django-taggit = ">=2.0,<3.0"
 django-treebeard = ">=4.5.1,<5.0"
 djangorestframework = ">=3.11.1,<4.0"
@@ -814,8 +830,8 @@ Willow = ">=1.4,<1.5"
 xlsxwriter = ">=1.2.8,<4.0"
 
 [package.extras]
-docs = ["pyenchant (>=3.1.1,<4)", "sphinxcontrib-spelling (>=5.4.0,<6)", "Sphinx (>=1.5.2)", "sphinx-autobuild (>=0.6.0)", "sphinx-wagtail-theme (==5.0.4)", "recommonmark (>=0.7.1)"]
-testing = ["python-dateutil (>=2.7)", "pytz (>=2014.7)", "elasticsearch (>=5.0,<6.0)", "Jinja2 (>=3.0,<3.1)", "boto3 (>=1.16,<1.17)", "freezegun (>=0.3.8)", "openpyxl (>=2.6.4)", "Unidecode (>=0.04.14,<2.0)", "azure-mgmt-cdn (>=5.1,<6.0)", "azure-mgmt-frontdoor (>=0.3,<0.4)", "coverage (>=3.7.0)", "flake8 (>=3.6.0)", "isort (==5.6.4)", "flake8-blind-except (==0.1.1)", "flake8-print (==2.0.2)", "doc8 (==0.8.1)", "jinjalint (>=0.5)", "docutils (==0.15)", "polib (>=1.1,<2.0)"]
+docs = ["pyenchant (>=3.1.1,<4)", "sphinxcontrib-spelling (>=5.4.0,<6)", "Sphinx (>=1.5.2)", "sphinx-autobuild (>=0.6.0)", "sphinx-wagtail-theme (==5.1.1)", "myst-parser (==0.17.0)"]
+testing = ["python-dateutil (>=2.7)", "pytz (>=2014.7)", "elasticsearch (>=5.0,<6.0)", "Jinja2 (>=3.0,<3.2)", "boto3 (>=1.16,<1.17)", "freezegun (>=0.3.8)", "openpyxl (>=2.6.4)", "azure-mgmt-cdn (>=5.1,<6.0)", "azure-mgmt-frontdoor (>=0.3,<0.4)", "django-pattern-library (>=0.7,<0.8)", "coverage (>=3.7.0)", "black (==22.3.0)", "flake8 (>=3.6.0)", "isort (==5.6.4)", "flake8-blind-except (==0.1.1)", "flake8-comprehensions (==3.8.0)", "flake8-print (==2.0.2)", "doc8 (==0.8.1)", "flake8-assertive (==2.0.0)", "curlylint (==0.13.1)", "djhtml (==1.4.13)", "polib (>=1.1,<2.0)"]
 
 [[package]]
 name = "webencodings"
@@ -879,7 +895,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "3.9.13"
-content-hash = "8ab585c09f08a204f21b93336ebdc4506d5c81c5a468101fd5a7d4cb1cd27600"
+content-hash = "64d3878fe35c282ae66927f1eaeb73242ca424a382a922d517ba463989347305"
 
 [metadata.files]
 anyascii = [
@@ -977,8 +993,12 @@ django-filter = [
     {file = "django_filter-21.1-py3-none-any.whl", hash = "sha256:f4a6737a30104c98d2e2a5fb93043f36dd7978e0c7ddc92f5998e85433ea5063"},
 ]
 django-modelcluster = [
-    {file = "django-modelcluster-5.3.tar.gz", hash = "sha256:0347cdcacb19a1078ee56cc3e6d5413ba27b8a5900710c53bb92b5d8ff3819cd"},
-    {file = "django_modelcluster-5.3-py2.py3-none-any.whl", hash = "sha256:f9f4250e706ee5e57503a30fbf37058b73e9fdc3190d75031338b81913cc9b4e"},
+    {file = "django-modelcluster-6.0.tar.gz", hash = "sha256:cdcffef5baf5d3759ee04c5b60ffaf1a0c95fc0f265e762f3ddfadde3394e5db"},
+    {file = "django_modelcluster-6.0-py2.py3-none-any.whl", hash = "sha256:4ae46f86c43702020f24f212222eef0a2588df937bbb523a5447da247b5fb130"},
+]
+django-permissionedforms = [
+    {file = "django-permissionedforms-0.1.tar.gz", hash = "sha256:4340bb20c4477fffb13b4cc5cccf9f1b1010b64f79956c291c72d2ad2ed243f8"},
+    {file = "django_permissionedforms-0.1-py2.py3-none-any.whl", hash = "sha256:d341a961a27cc77fde8cc42141c6ab55cc1f0cb886963cc2d6967b9674fa47d6"},
 ]
 django-storages = [
     {file = "django-storages-1.12.3.tar.gz", hash = "sha256:a475edb2f0f04c4f7e548919a751ecd50117270833956ed5bd585c0575d2a5e7"},
@@ -1269,8 +1289,8 @@ virtualenv = [
     {file = "virtualenv-20.15.1.tar.gz", hash = "sha256:288171134a2ff3bfb1a2f54f119e77cd1b81c29fc1265a2356f3e8d14c7d58c4"},
 ]
 wagtail = [
-    {file = "wagtail-2.16.2-py3-none-any.whl", hash = "sha256:d48ea4d45d09f8482a1b4632e0dca1aad99489cc26386f2af32b306e014832ba"},
-    {file = "wagtail-2.16.2.tar.gz", hash = "sha256:ee23dc1ba39d4785d20acc95274b29dbcf83f5d9fd670555f541f2a88eec9daa"},
+    {file = "wagtail-3.0.1-py3-none-any.whl", hash = "sha256:107d7a1ac9a4fde0fa2e454cc84f548dc41581cc627881abf4bbac3d5a30244c"},
+    {file = "wagtail-3.0.1.tar.gz", hash = "sha256:917393fcea8644734beb323d607e02e4316370982ba0b4ea689a576567247bc8"},
 ]
 webencodings = [
     {file = "webencodings-0.5.1-py2.py3-none-any.whl", hash = "sha256:a0af1213f3c2226497a97e2b3aa01a7e4bee4f403f95be16fc9acd2947514a78"},
