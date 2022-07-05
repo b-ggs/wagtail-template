@@ -1,4 +1,4 @@
-FROM python:3.9.12-bullseye
+FROM python:3.9.13
 
 # Set up user
 RUN useradd --create-home wagtail_template
