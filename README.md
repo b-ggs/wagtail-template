@@ -2,7 +2,7 @@
 
 ## About
 
-This project aims to provide a production-ready base for **Wagtail 2.16.x** and **Django 4.0.x** projects while still being fairly minimal enough to easily take apart and make your own.
+This project aims to provide a production-ready base for **Wagtail 3.0** and **Django 4.0.** projects while still being fairly minimal enough to easily take apart and make your own.
 
 Out of the box, this project can be easily deployed to Heroku or Dokku.
 
