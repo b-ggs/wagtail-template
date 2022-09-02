@@ -12,8 +12,9 @@ ENV VIRTUAL_ENV=/venv
 ENV PATH=$VIRTUAL_ENV/bin:$PATH
 RUN mkdir -p "$VIRTUAL_ENV" && chown -R wagtail_template:wagtail_template "$VIRTUAL_ENV"
 
-# Install poetry
-ENV POETRY_VERSION=1.1.13
+# Install poetry 1.1
+ENV GET_POETRY_IGNORE_DEPRECATION=1
+ENV POETRY_VERSION=1.1.15
 ENV POETRY_HOME=/opt/poetry
 ENV PATH=$POETRY_HOME/bin:$PATH
 RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python - \
